@@ -1,7 +1,5 @@
-import SmartKitchenComposition.CoffeeMaker;
-import SmartKitchenComposition.DishWasher;
-import SmartKitchenComposition.Refrigerator;
-import SmartKitchenComposition.SmartKitchen;
+import EncapsulationExample.EnhancedPlayer;
+import EncapsulationExample.Printer;
 
 public class Main {
     public static void main(String[] args) {
@@ -37,20 +35,37 @@ public class Main {
 
         //----------- This is the smartKitchen challenge code-----------------
 
-        // Instance of coffee Maker.
-        CoffeeMaker coffeeMaker = new CoffeeMaker(true);
-        // Instance of Dish washer.
-        DishWasher dishWasher = new DishWasher(true);
-        // Instance of Refrigerator.
-        Refrigerator refrigerator = new Refrigerator(true);
-        // Instance of Smart Kitchen which is a composition class and accept all the child classes.
-        SmartKitchen smartKitchen = new SmartKitchen(true,
-                coffeeMaker, dishWasher, refrigerator);
+//        // Instance of coffee Maker.
+//        CoffeeMaker coffeeMaker = new CoffeeMaker(true);
+//        // Instance of Dish washer.
+//        DishWasher dishWasher = new DishWasher(true);
+//        // Instance of Refrigerator.
+//        Refrigerator refrigerator = new Refrigerator(true);
+//        // Instance of Smart Kitchen which is a composition class and accept all the child classes.
+//        SmartKitchen smartKitchen = new SmartKitchen(true,
+//                coffeeMaker, dishWasher, refrigerator);
+//
+//        // Using getter executing the instance method of smartKitchen which are composited from the child classes.
+//        smartKitchen.pourMilk();
+//        smartKitchen.addWater();
+//        smartKitchen.loadDishWasher();
 
-        // Using getter executing the instance method of smartKitchen which are composited from the child classes
-        smartKitchen.pourMilk();
-        smartKitchen.addWater();
-        smartKitchen.loadDishWasher();
+        // Example of encapsulation where the EnhancedPlayer was called from here and passed the player name only.
+        System.out.println("Encapsulation Examples");
+        EnhancedPlayer suman = new EnhancedPlayer("Suman");
+        System.out.println("Initial health of the player = " + suman.healthRemaining());
+        suman.loseHealth(20);
+        System.out.println("Player health of the player after damage = " + suman.healthRemaining());
+        System.out.println("------------------------------");
 
+        // Encapsulation example with printer class.
+        // called the printer only with pagesPrinted value.
+        Printer printer = new Printer();
+        System.out.println("Number of pages has been printed: "+ printer.printPages(10));
+        // called the printer with all the properties values.
+        Printer printerWithAllArgs = new Printer(10,true);
+        System.out.println("Number of pages has been printed in duplex printer: "+printerWithAllArgs.printPages(25));
+        System.out.println("Added toner: " + printerWithAllArgs.addToner(80));
+        System.out.println("------------------------------");
     }
 }
