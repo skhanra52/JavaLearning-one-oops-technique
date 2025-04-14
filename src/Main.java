@@ -1,5 +1,4 @@
-import EncapsulationExample.EnhancedPlayer;
-import EncapsulationExample.Printer;
+import PolymorphismExamples.Movie;
 
 public class Main {
     public static void main(String[] args) {
@@ -49,23 +48,44 @@ public class Main {
 //        smartKitchen.pourMilk();
 //        smartKitchen.addWater();
 //        smartKitchen.loadDishWasher();
-
+//-------------------------------------------------------------------------------------------------
         // Example of encapsulation where the EnhancedPlayer was called from here and passed the player name only.
-        System.out.println("Encapsulation Examples");
-        EnhancedPlayer suman = new EnhancedPlayer("Suman");
-        System.out.println("Initial health of the player = " + suman.healthRemaining());
-        suman.loseHealth(20);
-        System.out.println("Player health of the player after damage = " + suman.healthRemaining());
-        System.out.println("------------------------------");
+//        System.out.println("Encapsulation Examples");
+//        EnhancedPlayer suman = new EnhancedPlayer("Suman");
+//        System.out.println("Initial health of the player = " + suman.healthRemaining());
+//        suman.loseHealth(20);
+//        System.out.println("Player health of the player after damage = " + suman.healthRemaining());
+//        System.out.println("------------------------------");
+//
+//        // Encapsulation example with printer class.
+//        // called the printer only with pagesPrinted value.
+//        Printer printer = new Printer();
+//        System.out.println("Number of pages has been printed: "+ printer.printPages(10));
+//        // called the printer with all the properties values.
+//        Printer printerWithAllArgs = new Printer(10,true);
+//        System.out.println("Number of pages has been printed in duplex printer: "+printerWithAllArgs.printPages(25));
+//        System.out.println("Added toner: " + printerWithAllArgs.addToner(80));
+//        System.out.println("------------------------------");
 
-        // Encapsulation example with printer class.
-        // called the printer only with pagesPrinted value.
-        Printer printer = new Printer();
-        System.out.println("Number of pages has been printed: "+ printer.printPages(10));
-        // called the printer with all the properties values.
-        Printer printerWithAllArgs = new Printer(10,true);
-        System.out.println("Number of pages has been printed in duplex printer: "+printerWithAllArgs.printPages(25));
-        System.out.println("Added toner: " + printerWithAllArgs.addToner(80));
-        System.out.println("------------------------------");
+        //----Polymorphism Examples started here-----------------------------------------
+
+        // direct call the base class method.
+//        Movie movie = new Movie("Start wars");
+//        movie.watchMovie();
+
+        // accessing the subclasses from different package using factory function.
+        // calling the adventure class.
+        Movie movie;
+        movie = Movie.getMovieOfParticularTypes("adventure", "Start Wars");
+        movie.watchMovie();
+        System.out.println("--------------------------------------------------------------------");
+        // calling comedy class
+        movie = Movie.getMovieOfParticularTypes("comedy", "House full 3");
+        movie.watchMovie();
+        System.out.println("--------------------------------------------------------------------");
+        // calling ScienceFiction
+        movie = Movie.getMovieOfParticularTypes("scienceFiction", "End of earth");
+        movie.watchMovie();
+        System.out.println("--------------------------------------------------------------------");
     }
 }
