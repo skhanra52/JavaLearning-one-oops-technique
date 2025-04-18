@@ -1,5 +1,7 @@
 import PolymorphismExamples.Movie;
 
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -87,5 +89,151 @@ public class Main {
         movie = Movie.getMovieOfParticularTypes("scienceFiction", "End of earth");
         movie.watchMovie();
         System.out.println("--------------------------------------------------------------------");
+
+        System.out.println("----------Example of Collection framework---------------------------");
+
+        //Creation of Set() using HashSet(). It creates unordered set and contains null value as well.
+        Set <String> fruits = new HashSet<String>();
+        // Added elements to the Set.
+        fruits.add("Apple");
+        fruits.add("Banana");
+        fruits.add("Chiku");
+        fruits.add("Jack fruit");
+        fruits.add(null);
+        System.out.println("Here is the Set: " +fruits);
+        // Checking existence of an element
+        boolean isAvailable;
+        isAvailable = fruits.contains("Apple");
+        System.out.println("Checking the fruit availability: "+isAvailable);
+        // Remove the element from the set
+        fruits.remove("Chiku");
+        System.out.println("Elements available after removing fruit: "+fruits);
+        // Check the size of the set.
+        System.out.println("Available Set size: "+fruits.size());
+
+        // Create Set using LinkedHashSet(), holds the insertion order, and also allow null.
+        Set <String> cities = new LinkedHashSet<>();
+        cities.add("Delhi");
+        cities.add("Kolkata");
+        cities.add("Mumbai");
+        cities.add("Agartala");
+        cities.add(null);
+        cities.add("Delhi");
+        System.out.println("Here is the Set of cities: "+cities);
+        //Checks the availability of the item.
+        isAvailable = cities.contains("Chennai");
+        System.out.println("Element checks on LinkedHashSet: "+isAvailable);
+
+        // Creates Set using TreeSet(), TreeSet does not allow null because it uses comparisons
+        // (compareTo or comparator), and comparing with null throws NullPointerException.
+        // Automatic order(custom order also allowed).
+        Set <String> states = new TreeSet<>();
+
+        states.add("Karnataka");
+        states.add("West Bengal");
+        states.add("Uttar Pradesh");
+        states.add("Assam");
+//        states.add(null); // we get NullPointerException error if we add null in TreeSet
+        System.out.println("Checks the TreeSet with auto sorting: "+states);
+
+        // Custom comparator sort strings by length.
+        Comparator <String> lengthComparator = (s1,s2) -> {
+            if(s1.length() == s2.length()){
+                return s1.compareTo(s2); // fallback to alphabetical sorting
+            }
+            return Integer.compare(s1.length(),s2.length());
+        };
+        // Created TreeSet() using custom comparator
+        Set <String> customSortStates = new TreeSet<>(lengthComparator);
+        customSortStates.add("Karnataka");
+        customSortStates.add("West Bengal");
+        customSortStates.add("Uttar Pradesh");
+        customSortStates.add("Assam");
+        System.out.println("customSortStates with the custom sort: "+customSortStates);
+
+        // Immutable Set can be created using of(),
+        // unordered and does not allow to add item after set creation.
+
+        Set <String> immutableSet = Set.of("Apple","Banana","Mango","Papaya","Jack fruit");
+        System.out.println("Immutable fruit display: "+immutableSet);
+        // Throw error in case of add elements. Gives UnsupportedOperationException
+//        immutableSet.add("Grapes");
+
+        // Traverse a set using forEach() and lambda expression.
+        System.out.println("------Set traversal using forEach and Lambda expression----------");
+        final int[] count = {0}; // created an array with initial value 0.
+        customSortStates.forEach((element) -> {
+            count[0]++;
+            System.out.println("Set item "+ count[0]+": " +element);
+        });
+        System.out.println("------Set traversal using enhanced for loop----------");
+        // Using for loop
+        for(String item : customSortStates){
+            System.out.println("Checking the Set items: "+item);
+        }
+        System.out.println("------List Example added--------------------------------");
+
+        // Addition of items to the arrayList, it is an ordered list.
+        List <String> garage = new ArrayList<String>();
+        garage.add("Ford Figo");
+        garage.add("Ford Mustang");
+        garage.add("Hunda City");
+        garage.add("Kia Seltos");
+        // Accessing the ArrayList
+        System.out.println("Collection of cars: "+garage);
+        // Accessing the particular item from the Arraylist using index
+        System.out.println("Check the item at second position: "+garage.get(2));
+        // Replacing an item in the garage at specific position.
+        garage.set(3,"Honda CIVIC");
+        System.out.println("Updated list of cars in the garage after replacement: "+garage);
+        // Removing item from the ArrayList.
+        garage.remove(3);
+        System.out.println("Updated list of cars in the garage: "+garage);
+        // Check the total number of cars available in the garage.
+        System.out.println("Total number of cars available in the garage: "+garage.size());
+        // Travers through the list of cars in garage
+        int carCount = 0;
+//        for(int i=0; i< garage.size(); i++){
+//            carCount++;
+//            System.out.println("Available car "+carCount +" : " +garage.get(i));
+//        }
+
+        // Above for loop can be replaced by enhanced for loop
+        for(String car : garage){
+            carCount++;
+            System.out.println("Available car "+carCount +" : " +car);
+        }
+        // Created a person class which will provide object to the ArrayList which is list of object.
+        List<Person> people = new ArrayList<>();
+        people.add(new Person(10, "Suman", "Khanra", 37, 1000.00));
+        people.add(new Person(11, "Vihaan", "Khanra", 3, 100.00));
+        people.add(new Person(12, "Geetha", "BR", 27, 5000.00));
+        people.add(new Person(13, "Setu", "Sharma", 60, 5000.00));
+        people.add(new Person(14, "Vitanshu", "Sahoo", 28, 1000.00));
+        // used enhanced for loop to access the person firstname whose age is above 30.
+        for (Person p: people){
+            if(p.getAge()>30) {
+                System.out.println("ArrayList item: " + p.getFirstName());
+            }
+        }
+
+        // Used stream to filter the records above 30 age.
+        List<Person> people1 =  people.stream()
+                .filter((person)-> person.getAge()>30)
+                .toList();
+//        people1.forEach((person) -> System.out.println(person));
+        System.out.println("----Checking new sort hand----------------");
+        // above lambda can be replaced using below shorthand
+        people1.forEach(System.out::println);
+
+        // Used stream to filter the record of below 30 age and get their full name
+        List<String>people2 = people.stream()
+                .filter((person) -> person.getAge()<30)
+                .map(Person::getFirstName) // method reference
+                .toList();
+        people2.forEach(System.out::println);
     }
+    //Note:  we have to perform insertion / Removal / inspection/ searching of element using
+    // Set, List, Queue, Maps, Iterators etc.
+
 }
